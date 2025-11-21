@@ -1,17 +1,17 @@
 {
   "basics": {
     "name": "Gabriel Windlin",
-    "label": "Security Engineer & Low-Level Developer",
+    "label": "Security Engineer & CS Student",
     "image": "/pfp.webp",
-    "email": "contact@gawindlin.com",
-    "phone": "+41798667358",
+    "email": "gawindlin@gmail.com",
+    "phone": "+41 79 866 7358",
     "url": "https://gawindlin.com",
-    "summary": "I navigate the intersection of software engineering and cybersecurity. My focus is on building robust systems, breaking weak ones, and automating the rest. I specialize in offensive security tools, network reconnaissance, and low-level socket programming.",
+    "summary": "Computer Science student at ETH Zürich with a focus on Systems and Security. I have practical experience maintaining on-premise Kubernetes clusters and developing offensive security tools in C and Python.",
     "theme": "dark",
     "location": {
-      "city": "Zurich",
-      "countryCode": "CH",
-      "region": "Switzerland"
+      "city": "Zürich",
+      "region": "Switzerland",
+      "countryCode": "CH"
     },
     "profiles": [
       {
@@ -24,7 +24,7 @@
       {
         "network": "LinkedIn",
         "username": "Gabriel Windlin",
-        "url": "https://www.linkedin.com/in/gabriel-windlin/",
+        "url": "https://linkedin.com/in/gabriel-windlin",
         "icon": "linkedin",
         "color": "#0077b5"
       }
@@ -32,93 +32,101 @@
   },
   "work": [
     {
-      "name": "Freelance / Projects",
-      "position": "Security Researcher",
-      "url": "https://github.com/gab-dev-7",
-      "startDate": "2023-01-01",
+      "name": "VIS ETHZ",
+      "position": "Computer Infrastructure Team",
+      "url": "https://vis.ethz.ch",
+      "startDate": "2025-10-01",
       "endDate": null,
-      "summary": "Developing automated penetration testing frameworks and network analysis tools.",
+      "summary": "Managing the computer infrastructure for the Computer Science Student Association.",
       "highlights": [
-        "Built a modular security suite for automated reconnaissance.",
-        "Implemented raw socket protocols in C for high-performance networking."
+        "Deployed 'Rallly' on the association's local cluster using Kubernetes.",
+        "Configured container orchestration and networking for self-hosted student services.",
+        " maintained and monitored on-premise server resources."
+      ]
+    },
+    {
+      "name": "PureGym",
+      "position": "Helper",
+      "url": "",
+      "startDate": "2025-06-01",
+      "endDate": null,
+      "summary": "Ensuring operational excellence and member support.",
+      "highlights": [
+        "Assisted with front desk operations and check-ins.",
+        "Maintained environment safety and equipment functionality."
+      ]
+    },
+    {
+      "name": "Skills Park",
+      "position": "All-rounder",
+      "url": "",
+      "startDate": "2022-03-01",
+      "endDate": null,
+      "summary": "Customer service and workflow optimization.",
+      "highlights": [
+        "Optimized workflow efficiency with team members.",
+        "Managed cash drawer accounting and customer needs."
       ]
     }
   ],
   "education": [
     {
-      "institution": "University of Technology",
+      "institution": "ETH Zürich",
       "url": "https://ethz.ch",
-      "area": "Computer Science",
-      "studyType": "Bachelor",
-      "startDate": "2020-09-01",
-      "endDate": "2024-07-01",
+      "area": "Bachelor of Computer Science",
+      "studyType": "BSc",
+      "startDate": "2024-09-01",
+      "endDate": "2028-06-01",
       "score": "",
       "courses": [
-        "Operating Systems",
-        "Network Security",
-        "Cryptography",
-        "Distributed Systems"
+        "Algorithms & Data Structures",
+        "Linear Algebra",
+        "Discrete Mathematics",
+        "Systems Programming"
       ]
     }
   ],
   "skills": [
     {
-      "name": "Cybersecurity",
+      "name": "Systems & Low Level",
       "level": "Advanced",
-      "keywords": [
-        "Penetration Testing",
-        "Network Forensics",
-        "Cryptography",
-        "OWASP"
-      ]
+      "keywords": ["C", "POSIX Sockets", "Linux", "Python", "Java"]
     },
     {
-      "name": "Languages",
-      "level": "Advanced",
-      "keywords": ["C", "C++", "Python", "Assembly", "Bash"]
-    },
-    {
-      "name": "DevOps & Tools",
+      "name": "DevOps & Cloud",
       "level": "Intermediate",
-      "keywords": ["Linux (Arch/Debian)", "Docker", "Git", "Neovim", "CI/CD"]
+      "keywords": ["Kubernetes", "Docker", "Git", "Container Orchestration"]
+    },
+    {
+      "name": "Web & Tools",
+      "level": "Intermediate",
+      "keywords": ["TypeScript", "HTML/CSS", "YAML", "Neovim"]
     }
   ],
   "projects": [
     {
+      "name": "TCP Port Scanner",
+      "isActive": true,
+      "description": "High-performance, single-file TCP scanner written in C using non-blocking I/O.",
+      "highlights": [
+        "Uses non-blocking sockets and select() for precise timeouts.",
+        "Implements EINPROGRESS handling for robust async connections.",
+        "Zero external dependencies."
+      ],
+      "url": "https://github.com/gab-dev-7",
+      "github": "https://github.com/gab-dev-7"
+    },
+    {
       "name": "SEC-SUITE",
       "isActive": true,
-      "description": "A comprehensive security framework for automated penetration testing.",
+      "description": "Comprehensive security testing toolkit for password auditing and network analysis.",
       "highlights": [
-        "Modular architecture allowing easy plugin development.",
-        "Includes password cracking, port scanning, and service enumeration.",
-        "Written in Python with a focus on speed and extensibility."
+        "Password cracking via Markov Chain & Dictionary attacks.",
+        "Multi-threaded brute force engine.",
+        "Includes modern hash support (bcrypt, argon2) and Keylogger utilities."
       ],
-      "url": "https://github.com/gab-dev-7/sec-suite",
-      "github": "https://github.com/gab-dev-7/sec-suite"
-    },
-    {
-      "name": "TCP Chat Server",
-      "isActive": true,
-      "description": "Bare-metal implementation of a threaded TCP chat server in C.",
-      "highlights": [
-        "Manual memory management and raw socket handling.",
-        "Supports multiple concurrent clients via POSIX threads.",
-        "Demonstrates deep understanding of the TCP/IP stack."
-      ],
-      "url": "https://github.com/gab-dev-7/chat-app",
-      "github": "https://github.com/gab-dev-7/chat-app"
-    },
-    {
-      "name": "Port Scanner",
-      "isActive": true,
-      "description": "High-performance network reconnaissance tool.",
-      "highlights": [
-        "Multi-threaded scanning engine.",
-        "optimized for minimal latency using low-level system calls.",
-        "Customizable scan ranges and timeout settings."
-      ],
-      "url": "https://github.com/gab-dev-7/port-scanner",
-      "github": "https://github.com/gab-dev-7/port-scanner"
+      "url": "https://github.com/gab-dev-7",
+      "github": "https://github.com/gab-dev-7"
     }
   ]
 }

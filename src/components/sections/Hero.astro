@@ -2,64 +2,71 @@
 import { basics } from '@cv'
 import Section from '@/components/Section.astro'
 import { Icon } from 'astro-icon/components'
-const { name, label, image, location, email } = basics
+import Skills from './Skills.astro' 
+
+const { name, label, image, location, email, phone } = basics
 const { city, region } = location
 ---
 
 <Section className={Astro.props.className}>
-  <div class="min-w-[275px]">
-    <section
-      id="about"
-      aria-label="About me"
-      class="group flex gap-2 flex-col rounded-3xl bg-skin-muted sm:bg-skin-button-muted p-4 transition-all  sm:hover:bg-skin-muted print:gap-0 print:p-2"
-    >
-      <div class="flex items-center text-center gap-4 print:gap-1">
-        <figure class='print:hidden'>
-          <img
-            class='aspect-square w-32 rounded-2xl bg-cover scale-110 sm:grayscale sm:scale-100 transition-all sm:group-hover:scale-110 sm:group-hover:grayscale-0'
-            src={image}
-            alt={`Profile of ${name}`}
-            loading='eager' />
-        </figure>
-        <div class="flex flex-col items-center">
-          <h1 class="text-4xl font-bold print:text-3xl font-mono">{name}</h1>
-          <div class="overflow-hidden mt-1">
-            <div class="font-mono font-bold text-xl lg:text-[1.1rem] text-skin-accent">
-               {label}
+  <div class="flex flex-col gap-8 md:flex-row">
+    
+    {/* --- LEFT COLUMN (Sidebar) --- */}
+    <div class="flex flex-col gap-4 md:w-[320px] shrink-0 md:sticky md:top-8 h-fit">
+        
+        {/* 1. Profile Card */}
+        <div class="flex flex-col gap-4 rounded-3xl bg-skin-muted sm:bg-skin-button-muted p-5 border border-skin-muted/20 shadow-lg shadow-skin-hue/5">
+          <div class="flex items-center gap-4">
+            <figure class='print:hidden shrink-0'>
+              <img
+                class='aspect-square w-24 rounded-2xl bg-cover grayscale hover:grayscale-0 transition-all duration-500'
+                src={image}
+                alt={`Profile of ${name}`}
+                loading='eager' />
+            </figure>
+            <div class="flex flex-col">
+              <h1 class="text-2xl font-bold font-mono text-skin-base">{name}</h1>
+              <span class="text-skin-accent font-mono text-xs mt-1">{label}</span>
+            </div>
+          </div>
+          
+          <div class='flex flex-col gap-2 text-xs text-skin-muted font-mono mt-2'>
+            <div class="flex items-center gap-2">
+                 <Icon name='globe' width={14} height={14} />
+                 {city}, {region}
+            </div>
+            <div class="flex items-center gap-2">
+                 <span class="text-skin-accent">@</span>
+                 <a href={`mailto:${email}`} class="hover:text-skin-base transition-colors">{email}</a>
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class='flex w-max gap-2 py-1 px-2 text-sm text-skin-muted font-mono'>
-        <Icon class='print:hidden sm:group-hover:text-skin-hue' name='globe' width={20} height={20} />
-        {city}, {region}
-      </div>
-      <div class="hidden print:block font-mono"><b>Contact: </b>{email}</div>
-    </section>
-  </div>
 
-  <div class='flex gap-6 print:hidden'>
-        <div class="flex group/social flex-wrap justify-evenly sm:h-40 sm:w-40 w-full h-min sm:flex-col rounded-3xl p-4 transition-all rotate-0 bg-skin-muted sm:bg-skin-button-muted sm:hover:bg-skin-muted">
-          {
-            basics.profiles.map(({network, url, icon, color}) => {
-              return (
-                <a
-                  class="flex flex-col sm:basis-1/2 items-center justify-center rounded-md transition-all hover:scale-110"
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label={`${network}`}
-                >
-                  <Icon name={icon} width={28} height={28} class='sm:grayscale sm:group-hover/social:grayscale-0 transition-all' style={`color: ${color};`} />
+        {/* 2. Social Links */}
+        <div class="flex justify-between gap-2 rounded-3xl bg-skin-muted sm:bg-skin-button-muted p-3 border border-skin-muted/20">
+            {basics.profiles.map(({network, url, icon, color}) => (
+                <a href={url} target="_blank" class="p-2 hover:bg-skin-button-accent/10 rounded-md transition-all group" aria-label={network}>
+                    <Icon name={icon} width={20} height={20} class="text-skin-muted group-hover:text-skin-accent transition-colors" />
                 </a>
-              )
-            })
-          }
+            ))}
         </div>
-        <div class="footer-button flex h-40 w-40 flex-col place-items-center rounded-3xl sm:bg-skin-muted p-4 transition-all rotate-0 bg-skin-muted  sm:hover:bg-skin-button-accent text-skin-hue sm:hover:text-skin-inverted max-sm:hidden print:hidden">
-          <Icon name='command' class='flex-1 w-1/2'/>
-          <p class="font-mono font-bold text-center">Open options</p>
+
+        {/* 3. Neovim Mode Button */}
+        <a href="/neovim" class="flex items-center justify-center gap-2 rounded-3xl bg-skin-button-muted p-3 hover:bg-skin-button-accent hover:text-skin-inverted transition-all group border border-skin-muted/20 text-skin-base">
+            <Icon name='command' class='w-5 h-5'/>
+            <span class="font-mono font-bold text-sm">Neovim Mode</span>
+        </a>
+
+        {/* 4. SKILLS (Moved here for symmetry) */}
+        <div class="rounded-3xl bg-skin-muted sm:bg-skin-button-muted p-5 border border-skin-muted/20">
+            <h3 class="font-mono font-bold text-skin-accent mb-4 text-sm border-b border-skin-muted/30 pb-2">:: Skillset</h3>
+            <Skills />
         </div>
+    </div>
+
+    {/* --- RIGHT COLUMN (Main Content) --- */}
+    <div class="flex-1 flex flex-col gap-8">
+        <slot /> 
+    </div>
   </div>
 </Section>
