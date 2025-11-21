@@ -51,13 +51,24 @@ const { city, region } = location
             ))}
         </div>
 
-        {/* 3. Neovim Mode Button */}
+        {/* 3. COMMAND PALETTE BUTTON (The missing piece!) */}
+        <button 
+            onclick="window.dispatchEvent(new CustomEvent('open-palette'))"
+            class="flex items-center justify-between gap-2 rounded-3xl bg-skin-button-muted p-3 hover:bg-skin-button-accent hover:text-skin-inverted transition-all group border border-skin-muted/20 text-skin-base cursor-pointer w-full"
+        >
+            <div class="flex items-center gap-2">
+                <Icon name='command' class='w-5 h-5'/>
+                <span class="font-mono font-bold text-sm">Command Palette</span>
+            </div>
+            <span class="text-xs font-mono opacity-50 border border-skin-muted/50 rounded px-1">Ctrl+K</span>
+        </button>
+
+        {/* 4. Neovim Mode Link */}
         <a href="/neovim" class="flex items-center justify-center gap-2 rounded-3xl bg-skin-button-muted p-3 hover:bg-skin-button-accent hover:text-skin-inverted transition-all group border border-skin-muted/20 text-skin-base">
-            <Icon name='command' class='w-5 h-5'/>
-            <span class="font-mono font-bold text-sm">Neovim Mode</span>
+            <span class="font-mono font-bold text-sm text-green-500">./neovim_mode.sh</span>
         </a>
 
-        {/* 4. SKILLS (Moved here for symmetry) */}
+        {/* 5. SKILLS */}
         <div class="rounded-3xl bg-skin-muted sm:bg-skin-button-muted p-5 border border-skin-muted/20">
             <h3 class="font-mono font-bold text-skin-accent mb-4 text-sm border-b border-skin-muted/30 pb-2">:: Skillset</h3>
             <Skills />

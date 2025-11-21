@@ -3,7 +3,6 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import '../globals.css';
 import CV from "@cv";
 import Analytics from '@vercel/analytics/astro';
-import BackgroundArt from "../components/BackgroundArt.astro"
 
 interface Props {
   title: string;
@@ -17,38 +16,19 @@ const {
   title,
   image = CV.basics.image,
   canonicalURL = CV.basics.url,
-  keywords = [
-    "Gabriel Windlin",
-    "Security Engineer",
-    "Cybersecurity",
-    "Software Engineer",
-    "Network Security",
-    "Portfolio"
-  ]
+  keywords = [ "Gabriel Windlin", "Security", "Portfolio" ]
 } = Astro.props;
 
 const { url, theme, name, location } = CV.basics;
-const { city, region } = location;
-
 const detailedDescription = `Gabriel Windlin - Security Engineer & Developer. Explore my portfolio.`;
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": name,
-  "alternateName": "Gab Dev",
-  "jobTitle": CV.basics.label,
   "url": url,
-  "email": CV.basics.email,
   "image": image,
   "description": detailedDescription,
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": city,
-    "addressRegion": region,
-    "addressCountry": "CH"
-  },
-  "knowsAbout": CV.skills.map(skill => skill.name),
 };
 ---
 
@@ -58,109 +38,69 @@ const structuredData = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="title" content={title} />
     <meta name="description" content={detailedDescription} />
-    <meta name="author" content={name} />
-    <meta name="keywords" content={keywords.join(", ")} />
-    
-    <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" href="/apple-touch-icon.webp" />
-    <link rel="preload" as="image" href={image} />
-    
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={url} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={detailedDescription} />
-    <meta property="og:image" content={image} />
-    
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={detailedDescription} />
-    <meta name="twitter:image" content={image} />
-    
-    <meta name="theme-color" content={theme === 'dark' ? '#1a1a1a' : '#ffffff'} />
-    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#050a14" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-    
     <Analytics />
   </head>
-  <body data-theme={theme} class="relative bg-skin-fill font-sans !cursor-auto">
-    <div class="absolute top-0 -z-10 h-full w-full print:hidden">
-      <div class="absolute bottom-auto left-[20%] right-auto top-0 h-[200px] w-[200px] -translate-x-[30%] translate-y-[20%] rounded-full bg-skin-hue/10 blur-[80px] invert-0 dark:bg-white/5"></div>
-    </div>
+  <body class="relative bg-skin-fill font-sans !cursor-auto overflow-x-hidden selection:bg-skin-accent selection:text-skin-inverted">
+    
+    <div class="fixed inset-0 -z-10 h-full w-full bg-skin-fill bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div class="fixed inset-0 -z-10 h-full w-full bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(0,242,255,0.15),rgba(255,255,255,0))]"></div>
+
     <slot />
+    
     <script src="../scripts/main.ts"></script>
-    <BackgroundArt/>
+    
+    <script is:inline>
+      // 1. Initialize Theme
+      const getTheme = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      
+      const setTheme = (theme) => {
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        }
+        localStorage.setItem('theme', theme);
+      };
+
+      // Apply on load
+      setTheme(getTheme());
+
+      // 2. Listen for Toggle Event from Command Palette
+      window.addEventListener('theme-toggle', () => {
+        const current = getTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+      });
+    </script>
   </body>
 </html>
 
 <style>
-  body{
-    * {
-    @apply rounded-lg;
-    -webkit-user-drag: none;
-    }
+  body {
+    /* Smooth scrolling for the whole page */
+    scroll-behavior: smooth;
   }
+  /* Global reset for the new look */
+  * { @apply rounded-lg; }
+  a { text-decoration: none; }
+  h1, h2, h3, h4 { @apply text-skin-base font-sans; margin: 0; }
+  p { @apply text-sm text-skin-muted; line-height: 1.6; }
   
-  a {
-    text-decoration: none;
-  }
-  
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply text-skin-base font-sans;
-    margin: 0;
-  }
-  
-  p {
-    @apply text-sm text-skin-muted;
-    line-height: 1.5;
-    text-wrap: pretty;
-  }
-  
-  .print {
-    display: none !important;
-  }
-  
-  .dev * {
-    @apply border border-red-500/50 bg-red-500/5;
-  }
-  #hotkeypad [data-backdrop] {
-    @apply !bg-zinc-800 !opacity-80;
-  }
-  
-  ::-webkit-scrollbar {
-    width: 2px;
-  }
-  
-  @media print {
-    .print {
-      display: block !important;
-    }
-    
-    astro-dev-toolbar {
-      display: none !important;
-    }
-    
-    article {
-      break-inside: avoid;
-    }
-  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0, 242, 255, 0.5); }
 </style>
