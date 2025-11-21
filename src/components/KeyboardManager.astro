@@ -5,7 +5,8 @@ import 'ninja-keys'
 <ninja-keys placeholder="Search commands..." hide-breadcrumbs></ninja-keys>
 
 <script>
-  const ninja = document.querySelector('ninja-keys');
+  // CRITICAL FIX: Cast to 'any' to expose the .data and .open() methods for the custom element
+  const ninja = document.querySelector('ninja-keys') as any; 
 
   if (ninja) {
     ninja.data = [
@@ -40,7 +41,7 @@ import 'ninja-keys'
            { 
              id: 'email', 
              title: 'Email Me', 
-             icon: 'mdi:email', 
+             icon: 'email', 
              handler: () => {
                 window.open('mailto:gawindlin@gmail.com', '_blank');
              }
