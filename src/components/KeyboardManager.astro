@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
-// REMOVED: import 'ninja-keys' from the frontmatter
+// The bare import is now gone
 ---
 
 <div id="ninja-keys-wrapper">
@@ -8,12 +8,13 @@ import { Icon } from 'astro-icon/components'
 </div>
 
 <script>
-  // Dynamic import and immediate execution on the client
-  import('ninja-keys').then(() => {
+  // FINAL FIX: Using the direct path to the package's entry file.
+  // This bypasses the bare module resolution failure in Vite.
+  import('/node_modules/ninja-keys/dist/ninja-keys.js').then(() => {
+    // Cast to 'any' to expose the .data and .open() methods
     const ninja = document.querySelector('ninja-keys') as any; 
 
     if (ninja) {
-        // Initializing the data MUST happen after the component is loaded
         ninja.data = [
             {
                 id: 'nav',
