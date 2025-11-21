@@ -4,32 +4,29 @@
 
 @layer base {
   :root {
-    /* --- YOUR TOKYO NIGHT COLORS --- */
-    /* BACKGROUND: Deep Blue/Black */
+    /* --- YOUR DOTFILES PALETTE --- */
+    /* BACKGROUND (from --bg-color) */
     --color-fill: 5, 10, 20;
 
-    /* TEXT: Soft White */
-    --color-text-base: 230, 241, 255;
-    --color-text-muted: 148, 163, 184;
+    /* CARD/MUTED BG (from --card-bg) */
+    --color-card: 15, 23, 36;
+    --color-button-muted: 15, 23, 36;
 
-    /* ACCENT: Neon Cyan */
-    --color-accent: 0, 242, 255;
+    /* TEXT (from --text-main) */
+    --color-text-base: 224, 230, 237;
+    --color-text-muted: 148, 163, 184; /* Keeping original muted for contrast */
+
+    /* ACCENT CYAN (from --accent-cyan) */
+    --color-accent: 0, 240, 255;
+    --color: 0, 240, 255; /* Main Hue */
+
+    /* ACCENT PINK (from --accent-pink) */
+    --color-button-accent: 255, 0, 85;
+    --color-button-accent-hover: 212, 0, 69; /* Slightly darker */
 
     /* --- REQUIRED VARIABLES --- */
-    /* Text turns white when highlighted */
     --color-text-inverted: 255, 255, 255;
-
-    /* Main Hue (Cyan) */
-    --color: 0, 242, 255;
-
-    /* Button Colors (Lantern Red) */
-    --color-button-accent: 255, 0, 60;
-    --color-button-accent-hover: 200, 0, 50;
-    --color-button-muted: 30, 41, 59;
-
-    /* Card/Border details */
-    --color-card: 26, 32, 44;
-    --color-border: 0, 242, 255;
+    --color-border: 15, 23, 36;
   }
 
   html {
@@ -39,7 +36,7 @@
   }
 }
 
-/* Scrollbar Styling */
+/* Scrollbar Styling (Updated to Cyan/Pink) */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -47,20 +44,18 @@
   background: rgb(5, 10, 20);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(0, 242, 255);
+  background: rgb(0, 240, 255); /* Accent Cyan */
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(255, 0, 60);
+  background: rgb(255, 0, 85); /* Accent Pink */
 }
 
-/* --- NUCLEAR CURSOR RESET --- */
-/* This overrides any hidden cursor settings from the theme or previous edits */
+/* --- CURSOR & ELEMENT RESET --- */
 * {
   cursor: auto !important;
 }
 
-/* Explicitly kill the custom cursor elements if they still exist in DOM */
 #cursor-dot,
 .cursor-dot,
 .cursor-inner,
