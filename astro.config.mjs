@@ -1,14 +1,9 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
-
-// NOTE: This repository previously included Vercel/Netlify adapter code.
-// We are ensuring it is clean for GitHub Pages static hosting.
-
-// Fix the path for the @cv import to ensure TypeScript works
 import path from "path";
 
-// Function to resolve files from the root of the project
+// Get the absolute path for project root
 const projectRoot = path.resolve(process.cwd());
 
 export default defineConfig({
@@ -21,14 +16,13 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        "@cv": path.resolve(projectRoot, "./cv.json"), // Alias the data file
+        // 1. Alias the cv.json file for easy import
+        "@cv": path.resolve(projectRoot, "./cv.json"),
       },
     },
     optimizeDeps: {
-      // CRITICAL: Tells Vite to optimize the custom web component dependency
+      // 2. CRITICAL: Tells Vite to optimize/bundle the custom web component dependency
       include: ["ninja-keys"],
     },
   },
-  // The previous theme included Vercel adapter; we should remove it entirely if it exists.
-  // If you see 'adapter' config here, remove it.
 });
