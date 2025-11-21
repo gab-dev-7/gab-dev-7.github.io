@@ -64,9 +64,14 @@ import { Icon } from 'astro-icon/components'
         ];
   }
 
+  // Open palette when the visible button is clicked (Listen for the button click)
   window.addEventListener('open-palette', () => {
+      // Find the component, which should now exist because the import ran.
       const ninja = document.querySelector('ninja-keys') as any;
-      if (ninja) ninja.open();
+      if (ninja) {
+          // This ensures the action is processed correctly.
+          ninja.open();
+      }
   });
 </script>
 
