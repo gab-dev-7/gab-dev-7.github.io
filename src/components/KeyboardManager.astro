@@ -1,74 +1,81 @@
 ---
-import 'ninja-keys'
+import { Icon } from 'astro-icon/components'
+// REMOVED: import 'ninja-keys' from the frontmatter
 ---
 
-<ninja-keys placeholder="Search commands..." hide-breadcrumbs></ninja-keys>
+<div id="ninja-keys-wrapper">
+    <ninja-keys placeholder="Search commands..." hide-breadcrumbs></ninja-keys>
+</div>
 
 <script>
-  // CRITICAL FIX: Cast to 'any' to expose the .data and .open() methods for the custom element
-  const ninja = document.querySelector('ninja-keys') as any; 
+  // Dynamic import and immediate execution on the client
+  import('ninja-keys').then(() => {
+    const ninja = document.querySelector('ninja-keys') as any; 
 
-  if (ninja) {
-    ninja.data = [
-      {
-        id: 'nav',
-        title: 'Navigation',
-        hotkey: 'cmd+n',
-        icon: 'mdi:compass-outline',
-        section: 'Navigation',
-        children: [
-            { id: 'home', title: 'Go to Home', icon: 'mdi:home', handler: () => window.location.href = '/' },
-            { id: 'neovim', title: 'Neovim Mode', icon: 'mdi:console', handler: () => window.location.href = '/neovim' },
-        ]
-      },
-      {
-        id: 'actions',
-        title: 'Actions',
-        hotkey: 'cmd+a',
-        icon: 'mdi:lightning-bolt',
-        section: 'Actions',
-        children: [
-           { 
-             id: 'theme', 
-             title: 'Toggle Theme (Light/Dark)', 
-             icon: 'mdi:theme-light-dark', 
-             hotkey: 'cmd+t',
-             handler: () => {
-                // Dispatches simple event to Layout.astro
-                window.dispatchEvent(new CustomEvent('theme-toggle'));
-             }
-           },
-           { 
-             id: 'email', 
-             title: 'Email Me', 
-             icon: 'email', 
-             handler: () => {
-                window.open('mailto:gawindlin@gmail.com', '_blank');
-             }
-           },
-           { 
-             id: 'cv', 
-             title: 'Download CV', 
-             icon: 'mdi:file-pdf-box', 
-             handler: () => {
-                const link = document.createElement('a');
-                link.href = '/cv.pdf'; // Points to public/cv.pdf
-                link.download = 'Gabriel_Windlin_CV.pdf';
-                link.click();
-             }
-           }
-        ]
-      },
-    ];
-  }
+    if (ninja) {
+        // Initializing the data MUST happen after the component is loaded
+        ninja.data = [
+            {
+                id: 'nav',
+                title: 'Navigation',
+                hotkey: 'cmd+n',
+                icon: 'mdi:compass-outline',
+                section: 'Navigation',
+                children: [
+                    { id: 'home', title: 'Go to Home', icon: 'mdi:home', handler: () => window.location.href = '/' },
+                    { id: 'neovim', title: 'Neovim Mode', icon: 'mdi:console', handler: () => window.location.href = '/neovim' },
+                ]
+            },
+            {
+                id: 'actions',
+                title: 'Actions',
+                hotkey: 'cmd+a',
+                icon: 'mdi:lightning-bolt',
+                section: 'Actions',
+                children: [
+                    { 
+                        id: 'theme', 
+                        title: 'Toggle Theme (Light/Dark)', 
+                        icon: 'mdi:theme-light-dark', 
+                        hotkey: 'cmd+t',
+                        handler: () => {
+                            window.dispatchEvent(new CustomEvent('theme-toggle'));
+                        }
+                    },
+                    { 
+                        id: 'email', 
+                        title: 'Email Me', 
+                        icon: 'mdi:email', 
+                        handler: () => {
+                            window.open('mailto:gawindlin@gmail.com', '_blank');
+                        }
+                    },
+                    { 
+                        id: 'cv', 
+                        title: 'Download CV', 
+                        icon: 'mdi:file-pdf-box', 
+                        handler: () => {
+                            const link = document.createElement('a');
+                            link.href = '/cv.pdf'; // Points to public/cv.pdf
+                            link.download = 'Gabriel_Windlin_CV.pdf';
+                            link.click();
+                        }
+                    }
+                ]
+            },
+        ];
+    }
+  });
 
   // Open palette when the visible button is clicked
   window.addEventListener('open-palette', () => {
+      const ninja = document.querySelector('ninja-keys') as any;
       if (ninja) ninja.open();
   });
 </script>
 
 <style>
+    /* Styling remains the same */
     ninja-keys {
         --ninja-accent-color: rgb(0, 242, 255); 
         --ninja-background: rgb(5, 10, 20); 
