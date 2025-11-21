@@ -18,39 +18,28 @@ const {
   image = CV.basics.image,
   canonicalURL = CV.basics.url,
   keywords = [
-    "Anmol Singh",
-    "AJ Dev",
-    "Anmol Pro",
-    "Full Stack Developer",
-    "Frontend Developer",
-    "Backend Developer",
-    "Web Developer",
+    "Gabriel Windlin",
+    "Security Engineer",
+    "Cybersecurity",
     "Software Engineer",
-    "React Developer",
-    "Next.js Developer",
-    "TypeScript Developer",
-    "Go Developer",
-    "Panipat",
-    "India",
+    "Network Security",
+    "Python Developer",
+    "C Developer",
     "Portfolio",
-    "E-commerce Projects",
-    "Music App",
-    "Social Media App"
+    "DevOps"
   ]
 } = Astro.props;
 
 const { url, theme, name, location } = CV.basics;
 const { city, region } = location;
 
-// Create a more detailed description
-const detailedDescription = `Anmol Singh (AJ Dev) - Full Stack Developer. Explore my portfolio, projects, and contact info. Frontend, backend, and more.`;
+const detailedDescription = `Gabriel Windlin - Security Engineer & Developer. Explore my portfolio, projects, and contact info.`;
 
-// Create structured data for better SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": name,
-  "alternateName": "AJ Dev",
+  "alternateName": "Gab Dev",
   "jobTitle": CV.basics.label,
   "url": url,
   "email": CV.basics.email,
@@ -110,8 +99,6 @@ const breadcrumbSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={detailedDescription} />
@@ -119,18 +106,10 @@ const breadcrumbSchema = {
     <meta name="keywords" content={keywords.join(", ")} />
     <meta name="geo.region" content="IN-HR" />
     <meta name="geo.placename" content={city} />
-    
-    <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
-    
-    <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="/apple-touch-icon.webp" />
-    
-    <!-- Preload critical assets -->
     <link rel="preload" as="image" href={image} />
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
@@ -138,8 +117,6 @@ const breadcrumbSchema = {
     <meta property="og:image" content={image} />
     <meta property="og:site_name" content={`${name}'s Portfolio`} />
     <meta property="og:locale" content="en_IN" />
-    
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:domain" content={url.split("//")[1] ?? ""} />
     <meta name="twitter:url" content={url} />
@@ -147,21 +124,16 @@ const breadcrumbSchema = {
     <meta name="twitter:description" content={detailedDescription} />
     <meta name="twitter:image" content={image} />
     <meta name="twitter:creator" content={CV.basics.profiles.find(p => p.network === 'X / Twitter')?.username} />
-    
-    <!-- Additional meta tags -->
     <meta name="theme-color" content={theme === 'dark' ? '#1a1a1a' : '#ffffff'} />
     <meta name="referrer" content="no-referrer" />
     <meta name="generator" content={Astro.generator} />
-    
-    <!-- Structured Data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-    
     {CV?.analyticsCode && <script is:inline src={CV.analyticsCode} />}
     <Analytics />
     <meta name="google-site-verification" content="oi4G-5FCwNn5m9MvSyjyBxVatgwi8KT_KtVuC9Pckmg" />
   </head>
-  <body data-theme={theme} class="relative bg-skin-fill font-sans">
+  <body data-theme={theme} class="relative bg-skin-fill font-sans !cursor-auto">
     <div class="absolute top-0 -z-10 h-full w-full print:hidden">
       <div class="absolute bottom-auto left-[20%] right-auto top-0 h-[200px] w-[200px] -translate-x-[30%] translate-y-[20%] rounded-full bg-skin-hue/10 blur-[80px] invert-0 dark:bg-white/5"></div>
     </div>
@@ -172,12 +144,11 @@ const breadcrumbSchema = {
 </html>
 
 <style>
-
   body{
     * {
     @apply rounded-lg;
-    cursor: none !important;
     -webkit-user-drag: none;
+    /* CLEANED: Removed cursor: none */
     }
   }
   
