@@ -3,7 +3,7 @@ import Section from "../Section.astro";
 import { work } from "@cv";
 ---
 
-<Section className={Astro.props.className} title="Experience">
+<Section className={Astro.props.className}>
   <ul class="flex flex-col">
     {work.map(({ name, startDate, endDate, position, summary, highlights, url }) => {
       const startYear = new Date(startDate).getFullYear();

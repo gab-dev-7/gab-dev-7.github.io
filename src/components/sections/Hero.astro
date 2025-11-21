@@ -51,9 +51,9 @@ const { city, region } = location
             ))}
         </div>
 
-        {/* 3. COMMAND PALETTE BUTTON (The missing piece!) */}
+        {/* 3. COMMAND PALETTE BUTTON (Activates command palette) */}
         <button 
-            onclick="window.dispatchEvent(new CustomEvent('open-palette'))"
+            onclick="const ninja = document.querySelector('ninja-keys'); if (ninja) { ninja.open(); }"
             class="flex items-center justify-between gap-2 rounded-3xl bg-skin-button-muted p-3 hover:bg-skin-button-accent hover:text-skin-inverted transition-all group border border-skin-muted/20 text-skin-base cursor-pointer w-full"
         >
             <div class="flex items-center gap-2">
@@ -63,10 +63,10 @@ const { city, region } = location
             <span class="text-xs font-mono opacity-50 border border-skin-muted/50 rounded px-1">Ctrl+K</span>
         </button>
 
-        {/* 4. Neovim Mode Link (Fix: Use standard icon and path) */}
+        {/* 4. Neovim Mode Link (Fix: Icon and path) */}
         <a href="/neovim" class="flex items-center justify-center gap-2 rounded-3xl bg-skin-button-muted p-3 hover:bg-skin-button-accent hover:text-skin-inverted transition-all group border border-skin-muted/20 text-skin-base">
-            <Icon name='mdi:console' class='w-5 h-5 text-skin-accent'/>
-            <span class="font-mono font-bold text-sm text-skin-base">./neovim_mode.sh</span>
+            <Icon name='simple-icons:neovim' class='w-5 h-5 text-green-500'/>
+            <span class="font-mono font-bold text-sm text-green-500">./neovim_mode.sh</span>
         </a>
 
         {/* 5. SKILLS */}
