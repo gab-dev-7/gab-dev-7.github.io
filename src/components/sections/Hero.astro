@@ -4,14 +4,15 @@ import Section from '@/components/Section.astro'
 import { Icon } from 'astro-icon/components'
 import Skills from './Skills.astro' 
 
-const { name, label, image, location, email } = basics
+// Note: Added 'summary' to destructuring here
+const { name, label, image, location, email, summary } = basics
 const { city, region } = location
 ---
 
 <Section className={Astro.props.className}>
   <div class="flex flex-col gap-8 md:flex-row">
     
-    {/* --- LEFT COLUMN (Sidebar) --- */}
+    {/* --- LEFT COLUMN (The Sidebar) --- */}
     <div class="flex flex-col gap-4 md:w-[320px] shrink-0 md:sticky md:top-8 h-fit">
         
         {/* 1. Profile Card */}
@@ -30,6 +31,11 @@ const { city, region } = location
             </div>
           </div>
           
+          {/* NEW: Summary Text Insertion */}
+          <p class="text-xs text-skin-muted mt-3 border-t border-skin-muted/30 pt-3">
+              {summary}
+          </p>
+          
           <div class='flex flex-col gap-2 text-xs text-skin-muted font-mono mt-2'>
             <div class="flex items-center gap-2">
                  <Icon name='globe' width={14} height={14} />
@@ -42,7 +48,7 @@ const { city, region } = location
           </div>
         </div>
 
-        {/* 2. Social Links (Fixed: Separated into two distinct buttons) */}
+        {/* 2. Social Links (Fixed: Two separate buttons) */}
         <div class="flex gap-4">
             {basics.profiles.map(({network, url, icon, color}) => (
                 <a 
@@ -56,7 +62,7 @@ const { city, region } = location
             ))}
         </div>
 
-        {/* 3. COMMAND PALETTE BUTTON (Activates command palette) */}
+        {/* 3. COMMAND PALETTE BUTTON */}
         <button 
             onclick="const ninja = document.querySelector('ninja-keys'); if (ninja) { ninja.open(); }"
             class="flex items-center justify-between gap-2 rounded-3xl bg-skin-button-muted p-3 hover:bg-skin-button-accent hover:text-skin-inverted transition-all group border border-skin-muted/20 text-skin-base cursor-pointer w-full"
@@ -68,7 +74,7 @@ const { city, region } = location
             <span class="text-xs font-mono opacity-50 border border-skin-muted/50 rounded px-1">Ctrl+K</span>
         </button>
 
-        {/* 4. Neovim Mode Link (Fix: Icon and path) */}
+        {/* 4. Neovim Mode Link (Final Icon Fix) */}
         <a href="/neovim" class="flex items-center justify-center gap-2 rounded-3xl bg-skin-button-muted p-3 hover:bg-skin-button-accent hover:text-skin-inverted transition-all group border border-skin-muted/20 text-skin-base">
             <Icon name='simple-icons:neovim' class='w-5 h-5 text-green-500'/>
             <span class="font-mono font-bold text-sm text-green-500">./neovim_mode.sh</span>

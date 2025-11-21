@@ -9,7 +9,7 @@ import { Icon } from "astro-icon/components";
     {
       projects.map(({ url, description, highlights, name, isActive, github }) => {
         return (
-          <div role="contentinfo" class="grid-span-1 ring-skin-muted relative flex flex-col rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 transition-all hover:ring-skin-accent hover:bg-skin-button-muted">
+          <div role="contentinfo" class="grid-span-1 ring-skin-muted relative flex flex-col rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 transition-all hover:ring-[rgb(255,0,85)] hover:bg-skin-button-muted">
             <div class="flex items-center justify-between space-x-2">
               <div class="flex items-center space-x-2">
                 <a
@@ -45,12 +45,11 @@ import { Icon } from "astro-icon/components";
             <ul class="mt-4 flex flex-wrap gap-2">
               {highlights.map((highlight) => {
                 return (
-                  <li class="rounded-md bg-skin-button-accent/10 px-2 py-1 text-xs font-medium text-skin-accent ring-1 ring-inset ring-skin-accent/20">
+                  <li class="rounded-md bg-skin-button-muted px-2 py-1 text-xs font-mono font-medium text-skin-accent ring-1 ring-inset ring-skin-accent/80 hover:text-[rgb(255,0,85)] hover:ring-[rgb(255,0,85)] transition-all">
                     {highlight}
                   </li>
                 );
-              })}
-            </ul>
+              })}            </ul>
           </div>
         );
       })

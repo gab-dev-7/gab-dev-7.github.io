@@ -14,7 +14,7 @@
 
     /* TEXT (from --text-main) */
     --color-text-base: 224, 230, 237;
-    --color-text-muted: 148, 163, 184; /* Keeping original muted for contrast */
+    --color-text-muted: 180, 190, 200; /* Keeping original muted for contrast */
 
     /* ACCENT CYAN (from --accent-cyan) */
     --color-accent: 0, 240, 255;
