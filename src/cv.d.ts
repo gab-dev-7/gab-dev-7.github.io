@@ -28,7 +28,7 @@ interface Basics {
 }
 
 interface Location {
-  address: string;
+  address?: string; // Made optional
   postalCode: string;
   city: string;
   countryCode: string;
@@ -39,8 +39,8 @@ interface Profile {
   network: string;
   username: string;
   url: string;
-  icon: string; // Added
-  color: string; // Added
+  icon: string;
+  color: string;
 }
 
 interface Work {

@@ -1,21 +1,24 @@
 ---
-import Section from '../Section.astro'
-import { skills } from '@cv'
-import { Icon } from 'astro-icon/components'
+import Section from "../Section.astro";
+import { skills } from "@cv";
 ---
 
-<Section className={Astro.props.className} title='Skills'>
-  <ul
-    class='w-100 inline-flex print:mt-4 flex-wrap gap-4 [&>li>svg]:text-skin-hue [&>li]:text-sm'>
+<Section className={Astro.props.className} title="Skills">
+  <ul class="flex flex-col gap-6">
     {
-      skills.map(({ name, icon, level}) => {
+      skills.map(({ name, keywords }) => {
         return (
-          <li class='group relative flex items-center gap-1 rounded-md border border-solid cursor-default border-skin-hue/20 bg-skin-button-accent/20 px-1 py-0.5 text-xs text-skin-hue print:border-none print:bg-transparent print:p-0 print:text-zinc-800 transform transition-transform duration-300 hover:scale-110 hover:translate-y-[-8px] sm:hover:cursor-none'>
-            {icon && <Icon name={icon} width={16} height={16} title={level} />}{' '}
-              <span>{name}</span>
-              {/* <span class="absolute transition-transform duration-300 group-hover:translate-y-full opacity-0 group-hover:opacity-100">{level}</span> */}
+          <li>
+            <h3 class="font-mono font-bold text-lg mb-2 text-skin-base">{name}</h3>
+             <div class="flex flex-wrap gap-2">
+                {keywords.map((key) => (
+                    <span class="rounded-md bg-skin-button-muted px-2 py-1 text-sm font-mono text-skin-muted ring-1 ring-skin-muted/50 hover:text-skin-accent hover:ring-skin-accent transition-all cursor-default">
+                        {key}
+                    </span>
+                ))}
+             </div>
           </li>
-        )
+        );
       })
     }
   </ul>
