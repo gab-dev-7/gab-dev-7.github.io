@@ -113,8 +113,8 @@
         "Implements EINPROGRESS handling for robust async connections.",
         "Zero external dependencies."
       ],
-      "url": "https://github.com/gab-dev-7",
-      "github": "https://github.com/gab-dev-7"
+      "url": "https://github.com/gab-dev-7/port-scanner",
+      "github": "https://github.com/gab-dev-7/port-scanner"
     },
     {
       "name": "SEC-SUITE",
@@ -125,8 +125,56 @@
         "Multi-threaded brute force engine.",
         "Includes modern hash support (bcrypt, argon2) and Keylogger utilities."
       ],
-      "url": "https://github.com/gab-dev-7",
-      "github": "https://github.com/gab-dev-7"
+      "url": "https://github.com/gab-dev-7/sec-suite",
+      "github": "https://github.com/gab-dev-7/sec-suite"
+    },
+    {
+      "name": "MatrixCalculator",
+      "isActive": false,
+      "description": "A Java-based tool for performing complex matrix operations.",
+      "highlights": [
+        "Supports matrix addition, subtraction, and multiplication.",
+        "Built with pure Java.",
+        "Currently being refactored for deployment."
+      ],
+      "url": "https://github.com/gab-dev-7/MatrixCalculator",
+      "github": "https://github.com/gab-dev-7/MatrixCalculator"
+    },
+    {
+      "name": "dotfiles",
+      "isActive": true,
+      "description": "My personal system configurations and development environment setup.",
+      "highlights": [
+        "Neovim, Zsh, and Hyprland configurations.",
+        "Automated installation scripts.",
+        "Documentation site available."
+      ],
+      "url": "https://github.com/gab-dev-7/dotfiles",
+      "github": "https://github.com/gab-dev-7/dotfiles"
+    },
+    {
+      "name": "FlowState",
+      "isActive": false,
+      "description": "A productivity tool designed to help maintain focus and workflow efficiency.",
+      "highlights": [
+        "Workflow optimization features.",
+        "Under active development.",
+        "Upcoming deployment."
+      ],
+      "url": "https://github.com/gab-dev-7/FlowState",
+      "github": "https://github.com/gab-dev-7/FlowState"
+    },
+    {
+      "name": "screen-savor",
+      "isActive": false,
+      "description": "A visual web experiment creating generative screensaver art.",
+      "highlights": [
+        "Built with JavaScript and HTML5 Canvas.",
+        "Generates dynamic visual patterns.",
+        "Deployment coming later this week."
+      ],
+      "url": "https://github.com/gab-dev-7/screen-savor",
+      "github": "https://github.com/gab-dev-7/screen-savor"
     }
   ]
 }
