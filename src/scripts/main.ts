@@ -62,3 +62,52 @@ container.addEventListener("mouseleave", () => {
 
 container.style.scrollBehavior = "smooth";
 container.style.cursor = "auto"; // Force auto on load
+
+// --- Easter Egg: Developer Console Message ---
+const consoleStyle1 = "color: #00f0ff; font-size: 18px; font-weight: bold;";
+const consoleStyle2 = "color: #e0e6ed; font-size: 14px;";
+console.log("%cLooking for a developer?", consoleStyle1);
+console.log("%cI'm available for hire. You can find my CV at https://gabriel-windlin.ch/cv.pdf", consoleStyle2);
+
+// --- Easter Egg: Konami Code ---
+import { launchConfetti } from './confetti';
+
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+function triggerKonamiEffect() {
+  const profilePic = document.querySelector('.profile-picture');
+  if (profilePic) {
+    profilePic.classList.add('konami-spin');
+    setTimeout(() => {
+      profilePic.classList.remove('konami-spin');
+    }, 1000); // Animation duration is 1s
+  }
+  launchConfetti();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === konamiCode[konamiIndex]) {
+    konamiIndex++;
+    if (konamiIndex === konamiCode.length) {
+      triggerKonamiEffect();
+      konamiIndex = 0;
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+
+// --- Easter Egg: Matrix Effect ---
+import { startMatrixEffect, stopMatrixEffect } from './matrix';
+
+let matrixActive = false;
+document.addEventListener('ninjakeys-matrix', () => {
+  if (matrixActive) {
+    stopMatrixEffect();
+    matrixActive = false;
+  } else {
+    startMatrixEffect();
+    matrixActive = true;
+  }
+});
