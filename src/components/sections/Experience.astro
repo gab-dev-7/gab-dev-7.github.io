@@ -1,54 +1,121 @@
 ---
-import Section from "../Section.astro";
 import { work } from "@cv";
 ---
 
-<Section className={Astro.props.className}>
-  <ul class="flex flex-col gap-6">
-    {work.map(({ name, position, summary, highlights, url, startDate, endDate }) => {
+<div class="experience-list">
+  {
+    work.map(({ name, position, summary, startDate, endDate, highlights }) => {
       const startYear = new Date(startDate).getFullYear();
       const endYear = endDate != null ? new Date(endDate).getFullYear() : "Present";
       const yearRange = `${startYear} - ${endYear}`;
 
       return (
-        <li class="relative">
-          <div class="flex flex-col gap-2 border-l-2 border-skin-muted/30 pl-4 py-2">
-            
-            {/* --- HEADER: Institution (Left) and Date (Right) --- */}
-            <header class="flex flex-col sm:flex-row justify-between items-baseline w-full">
-              
-              <h3 class="text-xl font-mono font-bold text-skin-base mb-1 sm:mb-0">
-                {name} — {position}
-              </h3>
-              
-              <time class="text-sm font-mono text-skin-muted text-right">
-                {yearRange}
-              </time>
-              
-            </header>
-            
-            {/* --- CONTENT --- */}
-            
-            {url && (
-              <a href={url} target="_blank" class="text-sm text-skin-muted hover:text-skin-accent transition-colors w-max">
-                {url.replace('https://', '')}
-              </a>
-            )}
-
-            <p class="text-sm text-skin-muted">{summary}</p>
-
-            {/* Highlights List */}
-            {highlights && (
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm text-skin-muted">
-                    {highlights.map(item => (
-                        <li class="pl-2">{item}</li>
-                    ))}
-                </ul>
-            )}
-            
-          </div>
-        </li>
+        <div class="card">
+          <header>
+            <h3>{name}</h3>
+            <p class="position">{position}</p>
+            <p class="year">{yearRange}</p>
+          </header>
+          <p>{summary}</p>
+          {highlights && (
+            <ul class="highlights">
+              {highlights.map((highlight) => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
+          )}
+        </div>
       );
-    })}
-  </ul>
-</Section>
+    })
+  }
+</div>
+
+<style>
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover::before {
+    border-color: var(--accent-cyan);
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(to right, var(--accent-cyan), var(--accent-pink));
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: -1;
+  }
+
+  .card:hover::after {
+    opacity: 0.1;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .card h3 {
+    color: var(--accent-pink);
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .card .position {
+    color: var(--text-main);
+    font-weight: bold;
+    margin: 0;
+  }
+  .card .year {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .highlights {
+    list-style-type: disc;
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+</style>

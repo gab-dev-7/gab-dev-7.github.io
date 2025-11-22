@@ -1,43 +1,124 @@
 ---
-import Section from "../Section.astro";
 import { education } from "@cv";
 ---
 
-<Section className={Astro.props.className}>
-  <ul class="flex flex-col gap-8">
-    {
-      education.map(({ institution, startDate, endDate, area, url, courses }) => {
-        const startYear = new Date(startDate).getFullYear();
-        const endYear = endDate != null ? new Date(endDate).getFullYear() : "Present";
+<div class="education-list">
+  {
+    education.map(({ institution, area, startDate, endDate, courses }) => {
+      const startYear = new Date(startDate).getFullYear();
+      const endYear = endDate != null ? new Date(endDate).getFullYear() : "Present";
+      const yearRange = `${startYear} - ${endYear}`;
 
-        return (
-          <li class="relative">
-            <div class="flex flex-col gap-2">
-              <header class="flex flex-col sm:flex-row justify-between items-baseline w-full">
-                <h3 class="text-lg font-mono font-bold text-skin-base mb-1 sm:mb-0">
-                  <a href={url} target="_blank" class="hover:text-skin-accent transition-colors">
-                    {institution}
-                  </a>
-                  <span class="text-sm text-skin-muted font-normal ml-2">{area}</span>
-                </h3>
-                <time class="text-sm font-mono text-skin-muted text-right">
-                  {startYear} - {endYear}
-                </time>
-              </header>
-              <h4 class="text-md text-skin-muted font-mono">{area}</h4>
-              {courses && (
-                 <div class="flex flex-wrap gap-2 mt-2">
-                    {courses.map(course => (
-                        <span class="text-xs px-2 py-1 rounded border border-skin-muted/30 text-skin-muted font-mono bg-skin-button-muted/20">
-                            {course}
-                        </span>
-                    ))}
-                 </div>
-              )}
-            </div>
-          </li>
-        );
-      })
-    }
-  </ul>
-</Section>
+      return (
+        <div class="card">
+          <header>
+            <h3>{institution}</h3>
+            <p class="year">{yearRange}</p>
+          </header>
+          <p>{area}</p>
+          {courses && (
+            <ul class="courses">
+              {courses.map((course) => (
+                <li>{course}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover::before {
+    border-color: var(--accent-cyan);
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(to right, var(--accent-cyan), var(--accent-pink));
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: -1;
+  }
+
+  .card:hover::after {
+    opacity: 0.1;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .card h3 {
+    color: var(--accent-pink);
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .card .year {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .courses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  .courses li {
+    background: #1e293b;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: var(--accent-cyan);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+  }
+</style>

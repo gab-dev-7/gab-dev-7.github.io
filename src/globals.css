@@ -4,34 +4,31 @@
 
 @layer base {
   :root {
-    /* --- YOUR DOTFILES PALETTE --- */
-    /* BACKGROUND (from --bg-color) */
-    --color-fill: 5, 10, 20;
+    /* --- DOTFILES PALETTE --- */
+    --bg-color: #050a14;
+    --card-bg: #0f1724;
+    --text-main: #e0e6ed;
+    --text-muted: #94a3b8;
+    --accent-pink: #ff0055;
+    --accent-cyan: #00f0ff;
 
-    /* CARD/MUTED BG (from --card-bg) */
-    --color-card: 15, 23, 36;
-    --color-button-muted: 15, 23, 36;
-
-    /* TEXT (from --text-main) */
-    --color-text-base: 224, 230, 237;
-    --color-text-muted: 180, 190, 200; /* Keeping original muted for contrast */
-
-    /* ACCENT CYAN (from --accent-cyan) */
-    --color-accent: 0, 240, 255;
-    --color: 0, 240, 255; /* Main Hue */
-
-    /* ACCENT PINK (from --accent-pink) */
-    --color-button-accent: 255, 0, 85;
-    --color-button-accent-hover: 212, 0, 69; /* Slightly darker */
-
-    /* --- REQUIRED VARIABLES --- */
-    --color-text-inverted: 255, 255, 255;
-    --color-border: 15, 23, 36;
+    /* --- YOUR CUSTOM PALETTE --- */
+    --color-fill: var(--bg-color);
+    --color-card: var(--card-bg);
+    --color-button-muted: var(--card-bg);
+    --color-text-base: var(--text-main);
+    --color-text-muted: var(--text-muted);
+    --color-accent: var(--accent-cyan);
+    --color: var(--accent-cyan);
+    --color-button-accent: var(--accent-pink);
+    --color-button-accent-hover: #d40047; /* Slightly darker pink */
+    --color-text-inverted: #ffffff;
+    --color-border: #1e293b;
   }
 
   html {
-    background-color: rgb(var(--color-fill));
-    color: rgb(var(--color-text-base));
+    background-color: var(--color-fill);
+    color: var(--color-text-base);
     cursor: auto !important;
   }
 }
@@ -41,15 +38,16 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgb(5, 10, 20);
+  background: var(--bg-color);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(0, 240, 255); /* Accent Cyan */
+  background: var(--accent-cyan);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(255, 0, 85); /* Accent Pink */
+  background: var(--accent-pink);
 }
+
 
 /* --- CURSOR & ELEMENT RESET --- */
 * {
@@ -61,4 +59,25 @@
 .cursor-inner,
 .cursor-outer {
   display: none !important;
+}
+
+/* Scroll Animations */
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Blockquote Styling */
+blockquote {
+  border-left: 4px solid var(--accent-pink);
+  padding-left: 1rem;
+  margin-left: 1rem;
+  font-style: italic;
+  color: var(--text-muted);
 }

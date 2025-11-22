@@ -1,0 +1,110 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="Contact">
+  <div class="container">
+    <header>
+      <h1>Contact Me</h1>
+      <p class="subtitle">I'd love to hear from you!</p>
+    </header>
+
+    <main>
+      <form action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+        <label>
+          Your name:
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          Your email:
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Message:
+          <textarea name="message" required></textarea>
+        </label>
+        <button type="submit" class="btn">Send</button>
+      </form>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  header {
+    text-align: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    background: linear-gradient(
+      to right,
+      var(--accent-cyan),
+      var(--accent-pink)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    font-family: var(--font-mono);
+  }
+
+  form {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.5rem;
+    color: var(--text-main);
+  }
+
+  input,
+  textarea {
+    background: var(--card-bg);
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 0.75rem;
+    color: var(--text-main);
+    width: 100%;
+  }
+
+  textarea {
+    min-height: 150px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--accent-pink);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    margin-top: 1rem;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    justify-self: start;
+  }
+
+  .btn:hover {
+    background: #d40047;
+    transform: scale(1.05);
+    color: white;
+    text-shadow: none;
+  }
+</style>

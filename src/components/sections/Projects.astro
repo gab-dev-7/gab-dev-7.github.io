@@ -1,58 +1,123 @@
 ---
-import Section from "../Section.astro";
 import { projects } from "@cv";
 import { Icon } from "astro-icon/components";
 ---
 
-<Section className={Astro.props.className}>
-  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 print:flex print:flex-col">
-    {
-      projects.map(({ url, description, highlights, name, isActive, github }) => {
-        return (
-          <div role="contentinfo" class="grid-span-1 ring-skin-muted relative flex flex-col rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 transition-all hover:ring-[rgb(255,0,85)] hover:bg-skin-button-muted">
-            <div class="flex items-center justify-between space-x-2">
-              <div class="flex items-center space-x-2">
-                <a
-                  href={url}
-                  title={`Ver ${name}`}
-                  class="group flex items-center gap-[6px] text-lg font-bold decoration-dotted underline-offset-[5px] hover:text-skin-accent hover:underline"
-                >
-                  {name}
-                  {isActive && (
-                    <span class="relative flex h-2 w-2">
-                      <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                      <span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-                    </span>
-                  )}
-                </a>
-              </div>
-
+<div class="grid">
+  {
+    projects.map(({ url, description, highlights, name, github }) => {
+      return (
+        <div class="card">
+          <a href={`/projects/${name.toLowerCase().replace(/ /g, "-")}`}>
+            <header class="flex items-center justify-between">
+              <h3 class="flex items-center gap-2">
+                {name}
+              </h3>
               {github && (
                 <a
                   href={github}
                   title="View source code on GitHub"
                   target="_blank"
                   rel="noopener"
-                  class="opacity-75 transition-opacity duration-100 hover:opacity-100"
+                  class="text-skin-muted hover:text-skin-accent transition-colors"
                 >
                   <Icon name="github" width={20} height={20} />
                 </a>
               )}
-            </div>
+            </header>
+            <p>{description}</p>
+          </a>
+          <footer class="mt-4 flex flex-wrap gap-2">
+            {highlights.map((highlight) => (
+              <span class="highlight">{highlight}</span>
+            ))}
+          </footer>
+        </div>
+      );
+    })
+  }
+</div>
 
-            <p class="mt-2 text-sm text-skin-muted">{description}</p>
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
 
-            <ul class="mt-4 flex flex-wrap gap-2">
-              {highlights.map((highlight) => {
-                return (
-                  <li class="rounded-md bg-skin-button-muted px-2 py-1 text-xs font-mono font-medium text-skin-accent ring-1 ring-inset ring-skin-accent/80 hover:text-[rgb(255,0,85)] hover:ring-[rgb(255,0,85)] transition-all">
-                    {highlight}
-                  </li>
-                );
-              })}            </ul>
-          </div>
-        );
-      })
-    }
-  </div>
-</Section>
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover::before {
+    border-color: var(--accent-cyan);
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(to right, var(--accent-cyan), var(--accent-pink));
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: -1;
+  }
+
+  .card:hover::after {
+    opacity: 0.1;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card h3 {
+    margin-top: 0;
+    color: var(--accent-pink);
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  .card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    flex-grow: 1;
+  }
+  .card a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .highlight {
+    background: #1e293b;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: var(--accent-cyan);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+  }
+</style>
+

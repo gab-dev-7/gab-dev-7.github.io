@@ -84,6 +84,27 @@ const structuredData = {
         const next = current === 'dark' ? 'light' : 'dark';
         setTheme(next);
       });
+
+      // 4. Neovim Mode Shortcut
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'v') {
+          window.location.href = '/neovim';
+        }
+      });
+
+      // 3. Scroll Animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      });
+
+      const sections = document.querySelectorAll('section');
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
     </script>
   </body>
 </html>
@@ -95,7 +116,15 @@ const structuredData = {
   }
   /* Global reset for the new look */
   * { @apply rounded-lg; }
-  a { text-decoration: none; }
+  a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  a:hover {
+    color: var(--accent-pink);
+    text-shadow: 0 0 8px var(--accent-pink);
+  }
   h1, h2, h3, h4 { @apply text-skin-base font-sans; margin: 0; }
   p { @apply text-sm text-skin-muted; line-height: 1.6; }
   

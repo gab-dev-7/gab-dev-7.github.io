@@ -1,0 +1,69 @@
+---
+import Layout from "@/layouts/Layout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <div class="container">
+    <header>
+      <h1>{frontmatter.title}</h1>
+      <p class="subtitle">{frontmatter.description}</p>
+      <time datetime={frontmatter.publishDate.toISOString()}>
+        {frontmatter.publishDate.toDateString()}
+      </time>
+    </header>
+    <main>
+      <article>
+        <slot />
+      </article>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  header {
+    text-align: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    background: linear-gradient(
+      to right,
+      var(--accent-cyan),
+      var(--accent-pink)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    font-family: var(--font-mono);
+  }
+
+  time {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    display: block;
+  }
+
+  main {
+    padding: 2rem 0;
+  }
+
+  article {
+    prose-invert: true;
+  }
+</style>

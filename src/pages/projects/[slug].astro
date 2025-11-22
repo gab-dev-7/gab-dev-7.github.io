@@ -1,0 +1,74 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { projects } from "@cv";
+
+export async function getStaticPaths() {
+  return projects.map((project) => {
+    return {
+      params: { slug: project.name.toLowerCase().replace(/ /g, "-") },
+      props: { project },
+    };
+  });
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={project.name}>
+  <div class="container">
+    <header>
+      <h1>{project.name}</h1>
+      <p class="subtitle">{project.description}</p>
+    </header>
+
+    <main>
+      <section id="details">
+        <h2>Details</h2>
+        <p>
+          This is where you can add more details about your project. You can
+          include a longer description, screenshots, code snippets, and more.
+        </p>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  header {
+    text-align: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    background: linear-gradient(to right, var(--accent-cyan), var(--accent-pink));
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    font-family: var(--font-mono);
+  }
+
+  h2 {
+    color: var(--accent-pink);
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  section {
+    margin-bottom: 4rem;
+  }
+</style>

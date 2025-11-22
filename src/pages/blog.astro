@@ -1,0 +1,106 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<Layout title="Blog">
+  <div class="container">
+    <header>
+      <h1>Blog</h1>
+      <p class="subtitle">A collection of my thoughts and experiences.</p>
+    </header>
+
+    <main>
+      <ul>
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.slug}`}>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+              <time datetime={post.data.publishDate.toISOString()}>
+                {post.data.publishDate.toDateString()}
+              </time>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  header {
+    text-align: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    background: linear-gradient(to right, var(--accent-cyan), var(--accent-pink));
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    font-family: var(--font-mono);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  li {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    transition: transform 0.2s;
+  }
+
+  li:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-cyan);
+  }
+
+  li a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h2 {
+    color: var(--accent-pink);
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  time {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    display: block;
+  }
+</style>
