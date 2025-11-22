@@ -115,12 +115,14 @@ const structuredData = {
   /* Global reset for the new look */
   * { @apply rounded-lg; }
   a {
-    color: var(--accent-cyan);
+    color: var(--text-muted);
     text-decoration: none;
-    transition: 0.2s;
+    transition: all 0.2s;
+    border-bottom: 1px solid transparent;
   }
   a:hover {
-    color: var(--accent-pink);
+    color: var(--text-main);
+    border-bottom-color: var(--accent-cyan);
   }
   h1, h2, h3, h4 { @apply text-skin-base font-sans; margin: 0; }
   p { @apply text-sm text-skin-muted; line-height: 1.6; }

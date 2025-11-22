@@ -39,50 +39,16 @@ import { education } from "@cv";
   .card {
     background: var(--card-bg);
     padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid transparent;
-    transition: transform 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 12px;
-    border: 1px solid #1e293b;
-    transition: border-color 0.2s;
-  }
-
-  .card:hover::before {
-    border-color: var(--accent-cyan);
-  }
-
-  .card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 12px;
-    background: linear-gradient(to right, var(--accent-cyan), var(--accent-pink));
-    opacity: 0;
-    transition: opacity 0.2s;
-    z-index: -1;
-  }
-
-  .card:hover::after {
-    opacity: 0.1;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    transition: transform 0.3s, border-color 0.3s;
   }
 
   .card:hover {
     transform: translateY(-5px);
+    border-color: var(--accent-cyan);
   }
+
   .card header {
     display: flex;
     justify-content: space-between;
@@ -91,9 +57,8 @@ import { education } from "@cv";
     flex-wrap: wrap;
   }
   .card h3 {
-    color: var(--accent-pink);
+    color: var(--accent-cyan);
     font-size: 1.25rem;
-    font-weight: bold;
     margin: 0;
   }
   .card .year {
@@ -114,11 +79,12 @@ import { education } from "@cv";
     padding: 0;
   }
   .courses li {
-    background: #1e293b;
+    background: transparent;
     padding: 0.2em 0.4em;
     border-radius: 4px;
-    color: var(--accent-cyan);
+    color: var(--text-muted);
     font-size: 0.8rem;
     font-family: var(--font-mono);
+    border: 1px solid var(--color-border);
   }
 </style>

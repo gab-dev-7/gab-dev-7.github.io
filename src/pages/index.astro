@@ -15,7 +15,7 @@ const { name, label, summary, image, profiles } = basics;
       <img src={image} alt={name} class="profile-picture" />
       <h1>{name}</h1>
       <p class="subtitle">{label}</p>
-      <nav>
+<nav>
         <div class="icon-row">
           <a href={profiles.find(p => p.network === 'GitHub')?.url} class="btn icon-btn" target="_blank" rel="noopener noreferrer">
             <Icon name="github" />
@@ -23,120 +23,50 @@ const { name, label, summary, image, profiles } = basics;
           <a href={profiles.find(p => p.network === 'LinkedIn')?.url} class="btn icon-btn" target="_blank" rel="noopener noreferrer">
             <Icon name="linkedin" />
           </a>
-          <a href="/contact" class="btn">Contact</a>
+          <a href={`mailto:${profiles.find(p => p.network === 'Email')?.url}`} class="btn icon-btn">
+            <Icon name="mail" />
+          </a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section id="about">
-        <h2>About</h2>
-        <p>{summary}</p>
-      </section>
-
-      <section id="projects">
-        <h2>Projects</h2>
-        <Projects />
-      </section>
-
-      <section id="experience">
-        <h2>Experience</h2>
-        <Experience />
-      </section>
-
-      <section id="education">
-        <h2>Education</h2>
-        <Education />
-      </section>
-    </main>
-  </div>
-</Layout>
-
+...
 <style>
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  header {
-    text-align: center;
-    padding: 4rem 0;
-    border-bottom: 1px solid #1e293b;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 3px solid var(--accent-pink);
-    margin: 0 auto 1.5rem;
-    display: block;
-  }
-
-  h1 {
-    font-size: 3.5rem;
-    line-height: 1.1;
-    color: var(--accent-cyan);
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    color: var(--text-muted);
-    font-size: 1.25rem;
-    font-family: var(--font-mono);
-  }
-
-  h2 {
-    color: var(--accent-pink);
-    font-size: 2rem;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-  }
-
-  section {
-    margin-bottom: 4rem;
-  }
-
+...
   nav {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    justify-content: center;
     margin-top: 2rem;
   }
 
-  .icon-row,
-  .text-row {
+  .icon-row {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    background: var(--accent-pink);
-    color: white;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
-  }
-
-  .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 0, 85, 0.8);
   }
 
   .icon-btn {
     padding: 0.5rem;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--accent-pink);
+    color: var(--text-muted);
+  }
+
+  .icon-btn:hover {
+    background: var(--accent-pink);
+    color: white;
   }
 
   .icon-btn :global(svg) {
